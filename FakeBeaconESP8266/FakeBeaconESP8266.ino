@@ -22,11 +22,10 @@ void setup() {
 
 
 void loop() {
-  sendBeacon("test"); //sends beacon frames with the SSID 'test'
-  
+  //sendBeacon("test"); //sends beacon frames with the SSID 'test'
   //sendRandomBeacon(10); //sends beacon frames with 10 character long random SSID
-
   //sendFuzzedBeacon("test",10); //sends beacon frames with 10 different SSID all starting with 'test' and ending with whitespaces (spaces and/or tabs)
+  RickRoll();
 }
 
 void sendFuzzedBeacon(char* baseSsid, int nr) {
@@ -75,7 +74,7 @@ void sendBeacon(char* ssid) {
                 /*22*/  0xc0, 0x6c, //Seq-ctl
                 //Frame body starts here
                 /*24*/  0x83, 0x51, 0xf7, 0x8f, 0x0f, 0x00, 0x00, 0x00, //timestamp - the number of microseconds the AP has been active
-                /*32*/  0x64, 0x00, //Beacon interval
+                /*32*/  0xFF, 0x00, //Beacon interval
                 /*34*/  0x01, 0x04, //Capability info
                 /* SSID */
                 /*36*/  0x00
@@ -112,3 +111,14 @@ void sendBeacon(char* ssid) {
     wifi_send_pkt_freedom(packet, packetSize, 0);
     delay(1);
 }
+
+void RickRoll() {
+  sendBeacon("01 Never gonna give you up,");
+  sendBeacon("02 never gonna let you down");
+  sendBeacon("03 Never gonna run around");
+  sendBeacon("04  and desert you");
+  sendBeacon("05 Never gonna make you cry,");
+  sendBeacon("06 never gonna say goodbye");
+  sendBeacon("07 Never gonna tell a lie");
+  sendBeacon("08  and hurt you");
+  }
